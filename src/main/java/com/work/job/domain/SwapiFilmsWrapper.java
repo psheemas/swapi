@@ -11,9 +11,9 @@ import java.util.List;
 @NoArgsConstructor
 @Getter
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class SwapiGeneralResponse {
+public class SwapiFilmsWrapper {
     private int count;
-    private int next;
-    private int previous;
+    private String next;
+    private String previous;
     private List<SwapiFilmsDto> results;
 }

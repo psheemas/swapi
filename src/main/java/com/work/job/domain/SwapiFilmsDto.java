@@ -11,7 +11,7 @@ import java.util.List;
 @NoArgsConstructor
 @Getter
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class SwapiFilmsDto {
+public class SwapiFilmsDto{
     private String title;
     private int episode_id;
     private String opening_crawl;

@@ -1,19 +1,16 @@
 package com.work.job.swapi.client;
 
-import com.work.job.domain.SwapiFilmsDto;
-import com.work.job.domain.SwapiGeneralResponse;
+import com.work.job.domain.SwapiFilmsWrapper;
+import com.work.job.domain.SwapiPeopleWrapper;
+import com.work.job.domain.SwapiPlanetsWrapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
-
-import java.lang.reflect.Type;
-import java.util.List;
 
 
 @Component
@@ -24,24 +21,30 @@ public class SwapiClient {
 
     @Autowired
     private RestTemplate restTemplate;
-/*
-    public List<SwapiFilmsDto> getListOfFilms() {
+
+    public SwapiFilmsWrapper getListOfFilms(){
         HttpHeaders headers = new HttpHeaders();
         headers.add("user-agent", "Mozilla");
         HttpEntity<String> entity = new HttpEntity<>("", headers);
-        ResponseEntity<List<SwapiFilmsDto>> response = restTemplate.exchange("https://swapi.co/api/films", HttpMethod.GET, entity, new ParameterizedTypeReference<List<SwapiFilmsDto>>() {
-        });
+        ResponseEntity<SwapiFilmsWrapper> response = restTemplate.exchange("https://swapi.co/api/films", HttpMethod.GET, entity, SwapiFilmsWrapper.class);
 
-        List<SwapiFilmsDto> responsuuu = response.getBody();
-        return responsuuu;
+        return response.getBody();
     }
 
- */
-    public SwapiGeneralResponse getListOfFilms(){
+    public SwapiPeopleWrapper searchPeople(String character_phrase){
         HttpHeaders headers = new HttpHeaders();
         headers.add("user-agent", "Mozilla");
         HttpEntity<String> entity = new HttpEntity<>("", headers);
-        ResponseEntity<SwapiGeneralResponse> response = restTemplate.exchange("https://swapi.co/api/films", HttpMethod.GET, entity,SwapiGeneralResponse.class);
+        ResponseEntity<SwapiPeopleWrapper> response = restTemplate.exchange("https://swapi.co/api/people/?search=" + character_phrase, HttpMethod.GET, entity, SwapiPeopleWrapper.class);
+
+        return response.getBody();
+    }
+
+    public SwapiPlanetsWrapper searchPlanets(){
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("user-agent", "Mozilla");
+        HttpEntity<String> entity = new HttpEntity<>("", headers);
+        ResponseEntity<SwapiPlanetsWrapper> response = restTemplate.exchange("https://swapi.co/api/planets", HttpMethod.GET, entity, SwapiPlanetsWrapper.class);
 
         return response.getBody();
     }

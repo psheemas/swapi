@@ -11,7 +11,7 @@ import java.util.List;
 @NoArgsConstructor
 @Getter
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class SwapiPlanetDto {
+public class SwapiPlanetsDto {
     private String name;
     private String diameter;
     private String rotation_period;
